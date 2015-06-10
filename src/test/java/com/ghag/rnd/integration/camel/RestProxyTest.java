@@ -17,7 +17,7 @@ public class RestProxyTest extends CamelSpringTestSupport {
     public void testPing() throws Exception {
         
     	//setup test conditions
-    	MockEndpoint mock = getMockEndpoint("mock:quote");
+    	MockEndpoint mock = getMockEndpoint("mock:restproxy");
     	mock.expectedMessageCount(1);
     	
     	//send message

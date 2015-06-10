@@ -10,7 +10,7 @@
 			<camel:from uri="jetty:http://localhost:9999/restproxy" />
 			<camel:to uri="http://localhost:8080/parcels?bridgeEndpoint=true" />
 			<convertBodyTo type="java.lang.String"/>
-			<camel:to uri="mock:quote"></camel:to>
+			<camel:to uri="mock:restproxy"></camel:to>
 		</camel:route>
 	</camel:camelContext>
 

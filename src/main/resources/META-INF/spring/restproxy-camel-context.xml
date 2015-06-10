@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:camel="http://camel.apache.org/schema/spring"
+	xsi:schemaLocation="
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd">
+
+	<camel:camelContext xmlns="http://camel.apache.org/schema/spring">
+		<camel:route>
+			<camel:from uri="jetty:http://localhost:9999/restproxy" />
+			<camel:to uri="http://localhost:8080/parcels?bridgeEndpoint=true" />
+			<convertBodyTo type="java.lang.String"/>
+			<camel:to uri="mock:quote"></camel:to>
+		</camel:route>
+	</camel:camelContext>
+
+</beans>

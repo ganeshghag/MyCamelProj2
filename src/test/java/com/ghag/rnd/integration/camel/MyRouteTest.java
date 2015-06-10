@@ -18,7 +18,7 @@ public class MyRouteTest extends CamelSpringTestSupport {
         
         
         template.sendBodyAndHeader("file:src/data", inputxml, Exchange.FILE_NAME, "hello.xml");
-		Thread.sleep(1000);
+		Thread.sleep(2000);
 		
 		//test is file has been created in destination
 		File target = new File("target/messages/others/hello.xml");

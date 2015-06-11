@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:camel="http://camel.apache.org/schema/spring"
+	xsi:schemaLocation="
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd">
+
+	<camel:camelContext xmlns="http://camel.apache.org/schema/spring">
+		<camel:route>
+			<camel:from uri="jetty:http://localhost:9999/insertjdbc" />
+			<setBody>
+				<constant>insert into person(address,email,employee_id,first_name,last_name,mobile) values ('addr','a@a.com',999,'ganesh','ghag','837377373')</constant>
+			</setBody>
+			<setHeader headerName="CamelRetrieveGeneratedKeys"><constant>true</constant></setHeader>
+			<to uri="jdbc:myDataSource" />
+			<camel:log message="My Auto Generated Key in Header is =${header.CamelGeneratedKeysRows}"></camel:log>
+			<convertBodyTo type="java.lang.String"/>
+			<camel:to uri="mock:quote"></camel:to>
+		</camel:route>
+	</camel:camelContext>
+
+	<bean id="myDataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://localhost:3306/test" />
+		<property name="username" value="root" />
+		<property name="password" value="" />
+	</bean>
+
+</beans>

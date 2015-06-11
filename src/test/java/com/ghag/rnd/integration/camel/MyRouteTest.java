@@ -3,7 +3,7 @@ package com.ghag.rnd.integration.camel;
 import java.io.File;
 
 import org.apache.camel.Exchange;
-import org.apache.camel.test.CamelSpringTestSupport;
+import org.apache.camel.test.junit4.CamelSpringTestSupport;
 import org.junit.Test;
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;

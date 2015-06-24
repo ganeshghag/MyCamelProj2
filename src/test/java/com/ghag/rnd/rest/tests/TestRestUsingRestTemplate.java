@@ -3,6 +3,10 @@ package com.ghag.rnd.rest.tests;
 
 
 
+import java.io.IOException;
+import java.util.Properties;
+
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -12,10 +16,23 @@ import org.springframework.web.client.RestTemplate;
 
 public class TestRestUsingRestTemplate {
 	
+	private static Properties props = new Properties(); 
+	
 	//List<HttpMessageConverter<?>> list = new ArrayList<HttpMessageConverter<?>>();
 	//list.add(new MappingJacksonHttpMessageConverter());
 	//restTemplate.setMessageConverters(list);
 
+	@BeforeClass
+	public static void initTest(){
+		String filename = "restunit-config.properties";
+		try {
+			props.load(ClassLoader.getSystemResourceAsStream(filename));
+		} catch (IOException e) {
+			throw new RuntimeException("file io exception loading properties file for lookup for filename = "+filename,e);
+		}
+
+	}
+	
 	
 	@Test
 	public void testHttpGetWithStrings(){
@@ -26,9 +43,11 @@ public class TestRestUsingRestTemplate {
 		
 		HttpEntity<String> entity = new HttpEntity<String>(null,headers);
 		
-		String url = "http://localhost:8080/parcels";
+		String url = props.getProperty("dummy.url");
 		ResponseEntity<String> resp = restTemplate.exchange(url,HttpMethod.GET, entity, String.class, new Object[] {});
 		System.out.println("response received in junit is \r\n"+resp.getBody());
+		
+		//place your asserts here
 		
 	}
 	

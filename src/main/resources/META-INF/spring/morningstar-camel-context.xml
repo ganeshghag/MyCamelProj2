@@ -8,7 +8,7 @@
 	<camel:camelContext xmlns="http://camel.apache.org/schema/spring">
 		<camel:route>
 			<camel:from uri="jetty:http://localhost:9999/morningstar" />
-			<camel:to uri="http://api.morningstar.com/v2/service/mf/FundShareClassBasicInfo/ticker/MSFT?bridgeEndpoint=true&amp;accesscode=bpcjm4q93c21cq1spyq2lrakq1ennggo&amp;format=json" />
+			<camel:to uri="http://api.morningstar.com/v2/service/mf/FundShareClassBasicInfo/ticker/MSFT?bridgeEndpoint=true&amp;accesscode=&amp;format=json" />
 			<convertBodyTo type="java.lang.String"/>
 			<camel:to uri="mock:morningstar"></camel:to>
 		</camel:route>
